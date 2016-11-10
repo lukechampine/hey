@@ -10,7 +10,7 @@ hey is a tiny library for displaying notifications on Linux.
 hey.Push(hey.Notification{
 	Title:    "foo",
 	Body:     "bar",
-	IconPath: "computer",
+	AppName:  "computer",
 	Duration: hey.DefaultDuration,
 })
 ```
