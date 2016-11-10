@@ -36,7 +36,6 @@ func Push(n Notification) (NotificationID, error) {
 	if err != nil {
 		return 0, err
 	}
-	defer conn.Close()
 
 	call := conn.Object("org.freedesktop.Notifications", "/org/freedesktop/Notifications").Call(
 		"org.freedesktop.Notifications.Notify", 0,
