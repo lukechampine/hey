@@ -10,20 +10,22 @@ import (
 // DefaultDuration is the OS's default notification duration.
 const DefaultDuration = -1 * time.Millisecond
 
-// NotificationID is returned by Push and may be used to replace an existing notification
+// NotificationID uniquely identifies a notification.
 type NotificationID uint32
 
-// A Notification represents a notification to be shown to the user.
+// A Notification represents a notification to be shown to the user. Only the
+// Title field is required.
 type Notification struct {
-	AppName    string // optional name of the application sending the notification
 	Title      string
 	Body       string
+	AppName    string
 	IconPath   string
-	Duration   time.Duration  // 0 means notification must be dismissed manually
-	ReplacesID NotificationID // optional notification ID that this notification replaces
+	Duration   time.Duration // 0 means notification must be dismissed manually
+	ReplacesID NotificationID
 }
 
-// Push displays a notification.
+// Push displays a notification. It returns a NotificationID that can be used
+// to replace the notification later.
 func Push(n Notification) (NotificationID, error) {
 	if n.Title == "" {
 		return 0, errors.New("notifications must have a title")
